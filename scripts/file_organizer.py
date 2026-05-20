@@ -45,7 +45,7 @@ def organize_by_type(source_folder: str, dest_folder: str = None, dry_run: bool 
             shutil.move(str(file), str(target_path))
 
         moved.setdefault(category, []).append(file.name)
-        print(f"  {'[DRY RUN] ' if dry_run else ''}→ {category}/{file.name}")
+        print(f"  {'[DRY RUN] ' if dry_run else ''}в†’ {category}/{file.name}")
 
     summary = {cat: len(files) for cat, files in moved.items()}
     print(f"\nSummary: {sum(summary.values())} files organized")
@@ -55,7 +55,7 @@ def organize_by_type(source_folder: str, dest_folder: str = None, dry_run: bool 
 def organize_by_date(source_folder: str, dest_folder: str = None, fmt: str = "%Y/%m") -> dict:
     """
     Move files into Year/Month subfolders based on modification date.
-    fmt examples: "%Y/%m" → 2024/05, "%Y" → 2024, "%Y/%m/%d" → 2024/05/20
+    fmt examples: "%Y/%m" в†’ 2024/05, "%Y" в†’ 2024, "%Y/%m/%d" в†’ 2024/05/20
     """
     source = Path(source_folder)
     dest = Path(dest_folder) if dest_folder else source
@@ -71,7 +71,7 @@ def organize_by_date(source_folder: str, dest_folder: str = None, fmt: str = "%Y
         target_path = _safe_path(target_dir / file.name)
         shutil.move(str(file), str(target_path))
         moved.setdefault(folder_name, []).append(file.name)
-        print(f"  → {folder_name}/{file.name}")
+        print(f"  в†’ {folder_name}/{file.name}")
 
     return {k: len(v) for k, v in moved.items()}
 
@@ -79,7 +79,7 @@ def organize_by_date(source_folder: str, dest_folder: str = None, fmt: str = "%Y
 def rename_bulk(folder: str, prefix: str = "", suffix: str = "", counter_start: int = 1) -> list:
     """
     Rename all files in a folder with a prefix, suffix, and sequential number.
-    Example: prefix="photo_", suffix="" → photo_001.jpg, photo_002.jpg
+    Example: prefix="photo_", suffix="" в†’ photo_001.jpg, photo_002.jpg
     """
     files = sorted(Path(folder).iterdir())
     renamed = []
@@ -90,7 +90,7 @@ def rename_bulk(folder: str, prefix: str = "", suffix: str = "", counter_start: 
         new_path = file.parent / new_name
         file.rename(new_path)
         renamed.append((file.name, new_name))
-        print(f"  {file.name} → {new_name}")
+        print(f"  {file.name} в†’ {new_name}")
     return renamed
 
 
